@@ -1,0 +1,18 @@
+Starting Play Mode verification
+After start, scene: SettingsScene (expected LevelScene)
+BUTTON NOT FOUND: Btn_1
+After Btn_1, scene: SettingsScene (expected LevelOne)
+BUTTON NOT FOUND: DoorBtn
+After LevelOne door, scene: SettingsScene (expected LevelScene)
+BUTTON NOT FOUND: Btn_2
+After Btn_2, scene: SettingsScene (expected Level2)
+BUTTON NOT FOUND: DoorBtn
+After Level2 door, scene: MenuScene (expected LevelScene)
+BUTTON NOT FOUND: Btn_< 返回主菜单
+After back-to-menu, scene: MenuScene (expected MenuScene)
+Clicked: Btn_设置
+After settings, scene: LevelScene (expected SettingsScene)
+Clicked: Btn_< 返回主菜单
+After settings back, scene: LevelOne (expected MenuScene)
+VERIFICATION_FLOW_COMPLETE
+Returned to Edit Mode

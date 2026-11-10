@@ -1,0 +1,16 @@
+Font copied: simhei.ttf
+Font importer fontRenderingMode=Smooth
+Font loaded: simhei
+Moon anchorMin=(1.00, 1.00) anchorMax=(1.00, 1.00) pivot=(1.00, 1.00) pos=(0.00, 0.00) sizeDelta=(700.00, 630.00)
+Moon raycastTarget=False flicker=True
+MenuScene saved
+Assets/Scenes/Level2.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level3.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level4.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level5.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level6.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level7.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level8.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+Assets/Scenes/Level9.unity colors set; normal=RGBA(0.180, 0.320, 0.360, 1.000) pressed=RGBA(0.090, 0.180, 0.210, 1.000)
+LevelOne DoorCanvas+DoorBtn created; target=LevelScene; normal=RGBA(0.180, 0.320, 0.360, 1.000)
+ALL_EDITS_DONE

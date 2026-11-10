@@ -1,0 +1,5 @@
+Using font: simhei
+Assets/Scenes/MenuScene.unity assigned font to 4 Text components
+Assets/Scenes/LevelScene.unity assigned font to 12 Text components
+Assets/Scenes/SettingsScene.unity assigned font to 1 Text components
+FONT_ASSIGN_DONE
