@@ -1,0 +1,17 @@
+Active scene: Assets/Scenes/MenuScene.unity
+Title BEFORE pos=(0.00, 270.00) size=(1400.00, 140.00) anchor=(0.50, 0.50) pivot=(0.50, 0.50)
+Title font size BEFORE 110 AFTER 128
+Title AFTER pos=(0.00, 280.00) size=(1400.00, 160.00)
+Btn_开始游戏 BEFORE pos=(0.00, 70.00) size=(480.00, 100.00)
+Btn_开始游戏 label font BEFORE 42 AFTER 42
+Btn_开始游戏 AFTER pos=(0.00, 70.00) size=(480.00, 100.00)
+Btn_设置 BEFORE pos=(0.00, -80.00) size=(480.00, 100.00)
+Btn_设置 label font BEFORE 42 AFTER 42
+Btn_设置 AFTER pos=(0.00, -80.00) size=(480.00, 100.00)
+Btn_退出游戏 BEFORE pos=(0.00, -230.00) size=(480.00, 100.00)
+Btn_退出游戏 label font BEFORE 42 AFTER 42
+Btn_退出游戏 AFTER pos=(0.00, -230.00) size=(480.00, 100.00)
+Moon BEFORE pos=(90.00, 50.00) size=(980.00, 882.00) anchor=(1.00, 1.00) pivot=(1.00, 1.00)
+Moon AFTER pos=(90.00, 50.00) size=(980.00, 882.00)
+MENU_ENLARGE_DONE
+Scene marked dirty. Awaiting manual Ctrl+S.
