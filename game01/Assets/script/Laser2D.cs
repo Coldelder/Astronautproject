@@ -1,70 +1,138 @@
 using UnityEngine;
 
+[ExecuteAlways]   // ç¼–è¾‘æ¨¡å¼ä¸‹ä¹Ÿè®© Scene è§†å›¾å®æ—¶é¢„è§ˆå…‰çº¿ä¸çº¿å®½
 [RequireComponent(typeof(LineRenderer))]
 public class Laser2D : MonoBehaviour
 {
-    [Header("ÉèÖÃ")]
-    public int maxReflections = 5;        // ×î´ó·´Éä´ÎÊı
-    public float maxDistance = 100f;      // µ¥´ÎÉäÏß×î´ó¾àÀë
-    public LayerMask mirrorLayer;         // ¾µ×ÓËùÔÚµÄÍ¼²ã
-    public LayerMask receiverLayer;       // ½ÓÊÕÆ÷ËùÔÚµÄÍ¼²ã
-    public Transform directionPoint;      // Ò»¸ö×ÓÎïÌå£¬ËüµÄ"up"·½Ïò¾ö¶¨¼¤¹âµÄ³õÊ¼³¯Ïò
+    [Header("è®¾ç½®")]
+    public int maxReflections = 5;        // æœ€å¤§åå°„æ¬¡æ•°
+    public float maxDistance = 100f;      // å•æ¬¡å°„çº¿æœ€å¤§è·ç¦»
+    public LayerMask mirrorLayer;         // é•œå­æ‰€åœ¨çš„å›¾å±‚ï¼šä¼šè¢«åå°„
+    public LayerMask receiverLayer;       // æ¥æ”¶å™¨æ‰€åœ¨çš„å›¾å±‚ï¼šå‘½ä¸­åç»ˆæ­¢
+    public LayerMask wallLayer;           // å¢™æ‰€åœ¨çš„å›¾å±‚ï¼šæŒ¡ä½æ¿€å…‰ï¼Œä¸åå°„
+    public Transform directionPoint;      // ä¸€ä¸ªå­ç‰©ä½“ï¼Œå®ƒçš„"up"æ–¹å‘å†³å®šæ¿€å…‰çš„åˆå§‹æœå‘
+
+    [Header("å¤–è§‚")]
+    [Tooltip("å…‰æŸå®½åº¦ï¼ˆä¸–ç•Œå•ä½ï¼‰ã€‚PPU 64 æ—¶ 1 åƒç´  = 0.0156ï¼›0.5 çº¦ç­‰äº Player ä¸€æ¡è…¿çš„å®½åº¦")]
+    public float beamWidth = 0.5f;
 
     private LineRenderer line;
 
-    void Awake()
+    void OnEnable()
     {
-        line = GetComponent<LineRenderer>();
-        line.useWorldSpace = true; // ÊÀ½ç×ø±ê£¬·½±ã¼ÆËã
+        EnsureLine();
+        ApplyBeamWidth();
+    }
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        EnsureLine();
+        ApplyBeamWidth();
+    }
+#endif
+
+    void EnsureLine()
+    {
+        if (line == null) line = GetComponent<LineRenderer>();
+        if (line != null) line.useWorldSpace = true;
+    }
+
+    /// <summary>
+    /// å®½åº¦åªç”± beamWidth å†³å®šã€‚
+    /// LineRenderer çš„ Width æ›²çº¿æ˜¯æŒ‰æ•´æ¡æŠ˜çº¿çš„ u(0â†’1) é‡‡æ ·çš„ï¼Œä¸€æ—¦æ›²çº¿ä¸æ˜¯å¸¸é‡ï¼Œ
+    /// åå°„åæŠ˜çº¿å˜çŸ­ï¼ŒåŒæ ·çš„ç¼©çª„è¢«å‹ç¼©è¿›æ›´çŸ­çš„è·ç¦»ï¼Œå°±ä¼šçœ‹åˆ°æ˜æ˜¾çš„é”¥å½¢ã€‚
+    /// è¿™é‡Œæ¯å¸§å¼ºåˆ¶æˆå¸¸é‡ï¼Œå½»åº•é¿å…è¯¥é—®é¢˜ï¼ˆç¼–è¾‘æ¨¡å¼ä¹Ÿç”Ÿæ•ˆï¼‰ã€‚
+    /// </summary>
+    void ApplyBeamWidth()
+    {
+        if (line == null) return;
+        line.widthCurve = AnimationCurve.Constant(0f, 1f, 1f);
+        line.widthMultiplier = beamWidth;
+
+        // 2D ç©æ³•å¿…é¡»ç”¨ TransformZï¼šView æ¨¡å¼ä¼šåœ¨ç›¸æœºç©ºé—´é‡å»ºç½‘æ ¼ï¼Œé‡åˆ°æµ…è§’çš„åå°„æ‹å¼¯æ—¶
+        // miter å°–è§’è¢«æ‹‰é•¿ï¼Œæ•´æ¡å¸¦çš„å®½åº¦ä¼šè¢«å¸¦åï¼ˆè¡¨ç°ä¸º"åå°„åå˜ç»†"ï¼‰ã€‚
+        line.alignment = LineAlignment.TransformZ;
+        if (line.numCornerVertices < 2) line.numCornerVertices = 4;
     }
 
     void Update()
     {
-        FireLaser(); // Ã¿Ö¡ÖØĞÂ¼ÆËã£¬ÊµÏÖÊµÊ±·´ÉäĞ§¹û
+        EnsureLine();
+        if (line == null || directionPoint == null) return;
+
+        ApplyBeamWidth();
+        FireLaser();
     }
 
     void FireLaser()
     {
-        // ³õÊ¼»¯Ïß¶Î£º´Ó×ÔÉíÎ»ÖÃ¿ªÊ¼
+        // 2D ç©æ³•ä¸‹æ•´æ¡æ¿€å…‰å¿…é¡»è½åœ¨åŒä¸€ä¸ªå¹³é¢ä¸Šã€‚
+        // å°„çº¿ç»“æœï¼ˆRaycastHit2D.pointã€Vector2 è¿ç®—ï¼‰éƒ½æ˜¯äºŒç»´çš„ï¼Œéšå¼è½¬æˆ Vector3 æ—¶
+        // z ä¼šå˜æˆ 0ï¼›å¦‚æœèµ·ç‚¹ç”¨ transform.positionï¼ˆå¸¦è‡ªèº« zï¼‰ï¼Œçº¿æ®µå°±ä¼šåœ¨ Z è½´ä¸Šæ–œæ‰ã€‚
+        float beamZ = transform.position.z;
+
         line.positionCount = 1;
-        line.SetPosition(0, transform.position);
+        line.SetPosition(0, new Vector3(transform.position.x, transform.position.y, beamZ));
 
-        Vector2 origin = transform.position;
-        Vector2 direction = directionPoint.up; // ÓÃ×ÓÎïÌåµÄupÖá×÷Îª¼¤¹â·½Ïò
+        Vector2 origin = new Vector2(transform.position.x, transform.position.y);
+        Vector2 direction = directionPoint.up;
 
+        int mask = mirrorLayer | receiverLayer | wallLayer;
         int reflectCount = 0;
+        LaserReceiver newHitReceiver = null;
 
-        // ¿ªÊ¼Ñ­»·£º·´Éä´ÎÊıÓÃ¾¡£¬»òÃ»´òÖĞÈÎºÎ¶«Î÷£¬¾ÍÍ£Ö¹
-        while (reflectCount <= maxReflections)
+        while (true)
         {
-            // 1. ·¢ÉäÉäÏß£¬¼ì²âÊÇ·ñ»÷ÖĞÎïÌå
-            RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxDistance, mirrorLayer | receiverLayer);
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxDistance, mask);
 
-            // Èç¹ûÃ»ÓĞ»÷ÖĞÈÎºÎÎïÌå£¬»­Ò»Ìõµ½×îÔ¶¾àÀëµÄÏß£¬È»ºó½áÊø
+            // æ²¡æ‰“ä¸­ä»»ä½•ä¸œè¥¿ï¼šç”»åˆ°æœ€è¿œè·ç¦»ï¼Œç»“æŸ
             if (hit.collider == null)
             {
-                line.positionCount++;
-                line.SetPosition(line.positionCount - 1, origin + direction * maxDistance);
+                Vector2 end = origin + direction * maxDistance;
+                AddPoint(new Vector3(end.x, end.y, beamZ));
                 break;
             }
 
-            // 2. »÷ÖĞÁËÎïÌå£¬ÏÈ°ÑÏß¶ÎÑÓÉìµ½Åö×²µã
-            line.positionCount++;
-            line.SetPosition(line.positionCount - 1, hit.point);
+            AddPoint(new Vector3(hit.point.x, hit.point.y, beamZ));
 
-            // 3. ¼ì²é»÷ÖĞµÄÊÇ²»ÊÇ½ÓÊÕÆ÷
-            if (((1 << hit.collider.gameObject.layer) & receiverLayer) != 0)
+            int layerBit = 1 << hit.collider.gameObject.layer;
+
+            // æ¥æ”¶å™¨ï¼šè®°å½•å¹¶ç»ˆæ­¢
+            if ((layerBit & receiverLayer) != 0)
             {
-                hit.collider.GetComponent<LaserReceiver>()?.OnLaserHit();
-                break; // »÷ÖĞ½ÓÊÕÆ÷ºó£¬¹âÏßÖÕÖ¹
+                newHitReceiver = hit.collider.GetComponent<LaserReceiver>();
+                break;
             }
 
-            // 4. ¼ÆËã·´Éä·½Ïò£¬ÎªÏÂÒ»´ÎÑ­»·×ö×¼±¸
-            // ¹Ø¼ü£º½«Åö×²µãÑØ·¨Ïß·½ÏòÆ«ÒÆÒ»µãµã£¬·ÀÖ¹ÏÂÒ»´ÎÉäÏßÆğµã¿¨ÔÚÅö×²ÌåÄÚ²¿µ¼ÖÂ¼ì²âÊ§°Ü
-            Vector2 offset = hit.normal * 0.01f;
-            origin = hit.point + offset;
+            // å¢™ï¼šæŒ¡ä½æ¿€å…‰ï¼Œä¸åå°„
+            if ((layerBit & wallLayer) != 0)
+            {
+                break;
+            }
+
+            // é•œå­ï¼šåå°„æ¬¡æ•°ç”¨å°½å°±åœåœ¨é•œå­è¡¨é¢
+            if (reflectCount >= maxReflections)
+            {
+                break;
+            }
+
+            // æ²¿æ³•çº¿åç§»ä¸€ç‚¹ç‚¹ï¼Œé˜²æ­¢ä¸‹ä¸€æ¬¡å°„çº¿èµ·ç‚¹å¡åœ¨ç¢°æ’ä½“å†…éƒ¨
+            origin = hit.point + hit.normal * 0.01f;
             direction = Vector2.Reflect(direction, hit.normal);
             reflectCount++;
         }
+
+        // æ¯å¸§éƒ½é€šçŸ¥è¢«ç…§å°„çš„æ¥æ”¶å™¨ï¼Œè®©å®ƒè‡ªå·±ç´¯ç§¯/è¡°å‡å……èƒ½ã€‚
+        // æ¥æ”¶å™¨é "æœ€åä¸€æ¬¡è¢«ç…§å°„çš„æ—¶é—´"åˆ¤æ–­æ¿€å…‰æ˜¯å¦è¿˜ç…§ç€è‡ªå·±ï¼Œæ‰€ä»¥ä¸éœ€è¦ enter/exit äº‹ä»¶ã€‚
+        // ç¼–è¾‘æ¨¡å¼ä¸‹ä¸é€šçŸ¥ï¼Œé¿å…åœ¨ç¼–è¾‘åœºæ™¯æ—¶è¯¯è§¦å‘å……èƒ½ä¸å¼€é—¨ã€‚
+        if (Application.isPlaying && newHitReceiver != null)
+            newHitReceiver.OnLaserHit();
+    }
+
+    void AddPoint(Vector3 position)
+    {
+        line.positionCount++;
+        line.SetPosition(line.positionCount - 1, position);
     }
 }
