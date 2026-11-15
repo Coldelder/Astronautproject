@@ -66,7 +66,7 @@ public class LaserController : MonoBehaviour
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 rotateInput = -1f;
 
-            directionPoint.Rotate(0f, 0f, rotateInput * rotateSpeed * Time.deltaTime);
+            transform.Rotate(0f, 0f, rotateInput * rotateSpeed * Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
