@@ -1,0 +1,9 @@
+Starting real-click verification
+[t=0.29s] LevelScene -> IntroScene
+Raycast at (36.41, 619.09) hit skip: True (total targets: 3)
+Dispatched pointerClick through EventSystem
+[t=2.71s] IntroScene -> Level1
+Reached Level1 via real click
+Returned to edit mode
+Level1 reached: True
+RESULT: PASS

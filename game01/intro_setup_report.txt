@@ -1,0 +1,6 @@
+Original active scene: Assets/Scenes/LevelScene.unity
+Saved intro scene: Assets/Scenes/IntroScene.unity
+Added intro scene to Build Settings.
+Level1 button 'Btn_1' before targetScene=Level1
+Level1 button targetScene now IntroScene; LevelScene saved.
+INTRO_SETUP_DONE

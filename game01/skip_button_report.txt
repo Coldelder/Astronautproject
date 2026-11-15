@@ -1,0 +1,4 @@
+Label before: 开始游戏 after: 跳过
+Saved skip button prefab: Assets/Prefab/SkipButton.prefab
+Placed Btn_Skip at top-left; size=(360.00, 70.00) pos=(60.00, -60.00)
+SKIP_BUTTON_DONE

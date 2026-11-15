@@ -1,0 +1,14 @@
+Starting skip-button verification
+[t=0.27s] LevelScene -> IntroScene
+Reached IntroScene; waiting 2s so the video is playing
+Clicked Btn_Skip at t=2.27
+[t=2.68s] IntroScene -> Level1
+Reached Level1 after skip
+Stable in Level1; exiting play mode
+Returned to edit mode
+---------------- SUMMARY ----------------
+IntroScene reached: True
+Skip clicked: True
+Level1 reached: True
+Skip -> Level1 delay: 0.41s
+RESULT: PASS

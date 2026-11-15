@@ -1,0 +1,4 @@
+Created EventSystem with StandaloneInputModule.
+Btn_Skip present; interactable=True
+IntroScene saved.
+EVENTSYSTEM_FIX_DONE
