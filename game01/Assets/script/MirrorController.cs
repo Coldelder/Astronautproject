@@ -70,7 +70,7 @@ public class MirrorController : MonoBehaviour
             */
 
             // 镜子上下 W/S 旋转功能
-            float rotateInput = Input.GetAxisRaw("Vertical");
+            float rotateInput = Input.GetAxisRaw("Horizontal");
             if (Mathf.Abs(rotateInput) > 0.01f)
             {
                 transform.Rotate(0f, 0f, rotateInput * rotateSpeed * Time.deltaTime);
