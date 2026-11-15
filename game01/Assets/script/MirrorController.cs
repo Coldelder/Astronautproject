@@ -8,7 +8,7 @@ public class MirrorController : MonoBehaviour
 
     [Header("交互参数")]
     public float interactRange = 5f;
-    public float moveSpeed = 3f;    // （虽然注释了移动，变量先留着不影响）
+    public float moveSpeed = 3f;    // 保留，以后想恢复左右移动还能用
     public float rotateSpeed = 90f;
 
     [Header("移动边界限制")]
@@ -16,6 +16,7 @@ public class MirrorController : MonoBehaviour
     public float maxX = 5f;
 
     private bool isControlling = false;
+    // 👈 删除了 private Rigidbody2D playerRb;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class MirrorController : MonoBehaviour
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
         }
+        // 👈 删除了获取 playerRb 的代码
     }
 
     void Update()
@@ -45,7 +47,11 @@ public class MirrorController : MonoBehaviour
             {
                 // 进入操控
                 isControlling = true;
+
+                // 只要这一行禁用了脚本，Player脚本里的 OnDisable 就会自动清零速度和播待机动画
                 if (playerMoveScript != null) playerMoveScript.enabled = false;
+
+                // 👈 删除了强行刹车的那段 playerRb.velocity 代码
             }
         }
 
