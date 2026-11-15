@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    private Animator animator; // 1. 新增：声明 Animator 变量
+    private Animator animator;
     private float horizontalInput;
 
     void Start()
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
         // 获取角色身上的组件
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>(); // 2. 新增：获取 Animator 组件
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -35,8 +35,7 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = true;  // 面向左
         }
 
-        // 3. 新增：控制动画状态
-        // Mathf.Abs(horizontalInput) 取绝对值，只要输入不为 0（即正在按方向键），就返回 true
+        // 控制动画状态
         if (Mathf.Abs(horizontalInput) > 0.01f)
         {
             animator.SetBool("isMoving", true);  // 正在移动，播放 Walk
@@ -52,4 +51,22 @@ public class Player : MonoBehaviour
         // 设置水平速度，同时保留原本的垂直速度（不影响下落）
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
     }
+
+    // 👇 ================== 新增的方法 ================== 👇
+    // 当这个脚本被禁用（enabled = false）时，Unity 会自动调用这个方法
+    void OnDisable()
+    {
+        // 1. 强制水平速度归零（防止惯性滑行）
+        if (rb != null)
+        {
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+        }
+
+        // 2. 强制通知 Animator 切回待机动画（防止卡在跑步的某一帧）
+        if (animator != null)
+        {
+            animator.SetBool("isMoving", false);
+        }
+    }
+    // 👆 =============================================== 👆
 }
