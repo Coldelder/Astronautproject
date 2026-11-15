@@ -2345,7 +2345,7 @@ PrefabInstance:
       objectReference: {fileID: 1365149632}
     - target: {fileID: 8614365839041816580, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: m_Name
-      value: Mirror (1)
+      value: Mirrorfixed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4028,7 +4028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8614365839041816580, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: m_Name
-      value: Mirror
+      value: Mirroractive
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
