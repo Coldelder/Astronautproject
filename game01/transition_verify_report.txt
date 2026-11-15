@@ -1,0 +1,6 @@
+Starting transition verification
+[t=0.37s] Level1 -> Level2
+Reached Level2 after trigger
+Returned to edit mode
+Level2 reached: True
+RESULT: PASS

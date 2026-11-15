@@ -1,0 +1,4 @@
+Before position=(7.50, -4.00, 0.00)
+Box size unchanged=(2.00, 2.00) isTrigger=True
+After position=(8.50, -4.00, 0.00); Level1 saved.
+TRIGGER_MOVE_DONE

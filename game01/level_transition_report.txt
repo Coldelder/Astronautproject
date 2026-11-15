@@ -1,0 +1,5 @@
+Cell (7,-5) center=(7.50, -4.50, 0.00)
+Cell (7,-4) center=(7.50, -3.50, 0.00)
+Trigger placed at (7.50, -4.00, 0.00) box size=(2.00, 2.00)
+Level1 saved.
+LEVEL_TRANSITION_DONE
