@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("背包状态")]
+    public bool hasBattery = false; // 玩家是否拥有电池
     [Header("移动设置")]
     public float moveSpeed = 5f;
 
