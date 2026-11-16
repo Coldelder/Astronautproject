@@ -191,7 +191,7 @@ MonoBehaviour:
   playerMoveScript: {fileID: 8807752566660229061, guid: 203e25f579bcf03489c094acdee15dc3, type: 3}
   interactRange: 2
   rotateSpeed: 90
-  hint: {fileID: 0}
+  isPowered: 0
 --- !u!1 &2609123834964690903
 GameObject:
   m_ObjectHideFlags: 0
