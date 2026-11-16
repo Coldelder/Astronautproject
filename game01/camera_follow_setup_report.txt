@@ -1,0 +1,11 @@
+Added CameraFollow to Camera
+CameraFollow fields: deadZoneRatio=0.6667 smoothTime=0.2 useManualBounds=False boundsTilemap=<auto union>
+Added Rigidbody2D to floor
+Rigidbody2D bodyType=Static
+Added CompositeCollider2D to floor
+CompositeCollider2D geometryType=Outlines generationType=Synchronous
+TilemapCollider2D usedByComposite=True
+floor cellBounds x=-8..26 y=-5..5 tileAnchor=(0.50, 0.50, 0.00)
+floor world edges: left=-8.000 right=26.000
+Scene saved: Assets/Scenes/Level4.unity
+CAMERA_FOLLOW_SETUP_DONE
