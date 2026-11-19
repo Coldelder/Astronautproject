@@ -12,7 +12,8 @@ public class LaserController : MonoBehaviour
     public float rotateSpeed = 90f;
 
     [Header("状态")]
-    public bool isPowered = false;           // 是否已通电（由电闸控制）
+    public bool isPowered = false;
+    public bool isInteractable = true; // 👈 激光也可以加个开关
 
     private bool isControlling = false;
     private LineRenderer lineRenderer;
@@ -25,17 +26,15 @@ public class LaserController : MonoBehaviour
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
         }
-
         if (directionPoint == null)
         {
             laser2D = GetComponent<Laser2D>();
             if (laser2D != null) directionPoint = laser2D.directionPoint;
         }
-
         lineRenderer = GetComponent<LineRenderer>();
         if (laser2D == null) laser2D = GetComponent<Laser2D>();
 
-        SetLaserState(false); // 游戏刚开始时，默认关闭
+        SetLaserState(false);
     }
 
     void Update()
@@ -45,7 +44,8 @@ public class LaserController : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.position);
         bool inRange = distance <= interactRange;
 
-        // 未操控状态
+        if (!isInteractable) return;
+
         if (!isControlling)
         {
             if (inRange && Input.GetKeyDown(KeyCode.E))
@@ -56,15 +56,17 @@ public class LaserController : MonoBehaviour
                     return;
                 }
 
-                // 有电，进入操控
-                isControlling = true;
-                if (playerMoveScript != null) playerMoveScript.enabled = false;
+                // 使用和镜子相同的静态锁
+                if (!MirrorController.isAnyObjectControlled)
+                {
+                    isControlling = true;
+                    MirrorController.isAnyObjectControlled = true; // 👈 占用全局锁
+                    if (playerMoveScript != null) playerMoveScript.enabled = false;
+                }
             }
         }
-        // 操控状态
         else
         {
-            // 旋转激光
             float rotateInput = 0f;
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) rotateInput = 1f;
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) rotateInput = -1f;
@@ -74,26 +76,35 @@ public class LaserController : MonoBehaviour
                 transform.Rotate(0f, 0f, rotateInput * rotateSpeed * Time.deltaTime);
             }
 
-            // 按 E 退出（Q键功能已移除）
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isControlling = false;
+                MirrorController.isAnyObjectControlled = false; // 👈 释放全局锁
                 if (playerMoveScript != null) playerMoveScript.enabled = true;
             }
         }
     }
 
-    // 👇 电闸调用这个方法时，不仅通电，而且直接开启激光
     public void PowerOn()
     {
         isPowered = true;
-        SetLaserState(true); // 直接亮起！
-        Debug.Log("激光已通电并自动开启。");
+        SetLaserState(true);
     }
 
     void SetLaserState(bool isOn)
     {
         if (lineRenderer != null) lineRenderer.enabled = isOn;
         if (laser2D != null) laser2D.enabled = isOn;
+    }
+
+    // 👇 同样加上防卡死保护
+    void OnDisable()
+    {
+        if (isControlling)
+        {
+            isControlling = false;
+            MirrorController.isAnyObjectControlled = false;
+            if (playerMoveScript != null) playerMoveScript.enabled = true;
+        }
     }
 }

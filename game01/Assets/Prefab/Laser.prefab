@@ -192,6 +192,7 @@ MonoBehaviour:
   interactRange: 2
   rotateSpeed: 90
   isPowered: 0
+  isInteractable: 1
 --- !u!1 &2609123834964690903
 GameObject:
   m_ObjectHideFlags: 0
