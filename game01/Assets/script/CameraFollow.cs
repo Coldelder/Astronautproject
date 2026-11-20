@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
     [Header("Dead Zone")]
     [Tooltip("Dead-zone half width as a fraction of the visible world half width. 2/3 = 0.6667.")]
     [Range(0f, 1f)]
-    public float deadZoneRatio = 2f / 3f;
+    public float deadZoneRatio = 0.4f;
 
     [Header("Smoothing")]
     [Tooltip("SmoothDamp time in seconds. Smaller is snappier, larger is smoother.")]

@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class Lt45 : MonoBehaviour
 {
     [Tooltip("Scene loaded after the fade.")]
-    public string targetScene = "Level5";
+    public string targetScene = "IntroScene 1";
 
     public float fadeDuration = 0.5f;
 
