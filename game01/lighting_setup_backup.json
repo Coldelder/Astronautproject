@@ -1,0 +1,7 @@
+graphics: Assets/Render/2d.asset
+quality[0] Very Low: Assets/Render/2d.asset
+quality[1] Low: Assets/Render/2d.asset
+quality[2] Medium: Assets/Render/2d.asset
+quality[3] High: Assets/Render/2d.asset
+quality[4] Very High: Assets/Render/2d.asset
+quality[5] Ultra: Assets/Render/2d.asset
