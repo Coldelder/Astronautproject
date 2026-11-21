@@ -5462,7 +5462,7 @@ GameObject:
   - component: {fileID: 1993257283}
   - component: {fileID: 1993257282}
   - component: {fileID: 1993257281}
-  - component: {fileID: 1993257280}
+  - component: {fileID: 1993257285}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5470,25 +5470,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1993257280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993257279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c973ca6f558eda498c2ace46f037398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  deadZoneRatio: 0.6666667
-  smoothTime: 0.2
-  boundsTilemap: {fileID: 0}
-  useManualBounds: 0
-  manualMapLeft: 0
-  manualMapRight: 0
 --- !u!114 &1993257281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5607,6 +5588,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1993257285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993257279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4715561fe65784940ad89019aab1ebba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  deadZoneRatio: 0.4
+  smoothTime: 0.2
+  verticalFollow: 1
+  deadZoneRatioY: 0.3
+  smoothTimeY: 0.2
+  boundsTilemap: {fileID: 0}
+  useManualBounds: 0
+  manualMapLeft: 0
+  manualMapRight: 100
+  manualMapBottom: 0
+  manualMapTop: 20
+  drawDeadZoneGizmos: 1
 --- !u!1 &2026285328
 GameObject:
   m_ObjectHideFlags: 0
