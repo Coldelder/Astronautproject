@@ -1,20 +1,27 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal; // 👈 必须引入这个，才能使用 Light2D
 
 public class FuseBox : MonoBehaviour
 {
     [Header("引用")]
     public Transform player;
-    public MonoBehaviour playerMoveScript;
     public LaserController laserController;
 
     [Header("外观变化")]
-    public SpriteRenderer fuseBoxRenderer;  // 电闸的图片组件
-    public Sprite activatedSprite;          // 拉闸后要变成的新图片（在Inspector拖入）
+    public SpriteRenderer fuseBoxRenderer;
+    public Sprite activatedSprite;
+
+    [Header("灯光效果 (新增)")]
+    public Light2D targetLight;             // 要闪烁的灯光（拖入场景里的灯）
+    public float finalIntensity = 2f;       // 闪烁完之后，灯光最终达到的亮度
+    public float flickerDuration = 0.5f;    // 闪烁持续的时间
+    public int flickerCount = 5;            // 闪烁的次数
 
     [Header("参数")]
     public float interactRange = 2f;
 
-    private bool isActivated = false; // 电闸是否已经开启过
+    private bool isActivated = false;
 
     void Start()
     {
@@ -23,8 +30,6 @@ public class FuseBox : MonoBehaviour
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) player = p.transform;
         }
-
-        // 如果忘了拖，尝试自动获取
         if (fuseBoxRenderer == null) fuseBoxRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -34,37 +39,65 @@ public class FuseBox : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // 玩家在范围内，并且按下了 E
         if (distance <= interactRange && Input.GetKeyDown(KeyCode.E))
         {
             Player playerScript = player.GetComponent<Player>();
 
             if (playerScript != null && playerScript.hasBattery)
             {
-                // 成功拉闸！
                 isActivated = true;
-
-                // 消耗掉电池
                 playerScript.hasBattery = false;
 
-                // 通知激光通电并亮起
-                if (laserController != null)
-                {
-                    laserController.PowerOn();
-                }
-
-                // 👇 切换电闸的图片
+                // 切换电闸图片
                 if (fuseBoxRenderer != null && activatedSprite != null)
                 {
                     fuseBoxRenderer.sprite = activatedSprite;
                 }
 
-                Debug.Log("电闸已拉下，图片已切换，激光已开启！");
-            }
-            else
-            {
-                Debug.Log("电闸没有反应...需要先找到电池！");
+                // 激光通电
+                if (laserController != null) laserController.PowerOn();
+
+                // 👇 触发灯光闪烁
+                if (targetLight != null)
+                {
+                    StartCoroutine(FlickerAndBrighten());
+                }
+                else
+                {
+                    Debug.LogWarning("没有指定要闪烁的灯光！");
+                }
             }
         }
+    }
+
+    // 👇 核心逻辑：灯光闪烁协程
+    private IEnumerator FlickerAndBrighten()
+    {
+        float originalIntensity = targetLight.intensity;
+        float flickerInterval = flickerDuration / (flickerCount * 2f);
+
+        // 1. 闪烁阶段
+        for (int i = 0; i < flickerCount; i++)
+        {
+            targetLight.intensity = 0f; // 关灯
+            yield return new WaitForSeconds(flickerInterval);
+
+            targetLight.intensity = originalIntensity; // 开灯
+            yield return new WaitForSeconds(flickerInterval);
+        }
+
+        // 2. 平滑变亮阶段
+        float elapsed = 0f;
+        float brightenTime = 1f; // 变亮过程耗时1秒
+        float startIntensity = targetLight.intensity;
+
+        while (elapsed < brightenTime)
+        {
+            elapsed += Time.deltaTime;
+            targetLight.intensity = Mathf.Lerp(startIntensity, finalIntensity, elapsed / brightenTime);
+            yield return null; // 等待下一帧
+        }
+
+        targetLight.intensity = finalIntensity; // 确保最后达到目标亮度
     }
 }

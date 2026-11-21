@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class LaserReceiver : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class LaserReceiver : MonoBehaviour
     public Animator animator;
     public string animSpeedParam = "AnimSpeed"; // 刚刚在Animator里创建的Float参数名
     public int animLayerIndex = 0;              // 动画所在的层，通常是0
+
+    [Header("充能发光")]
+    public Light2D chargeLight;        // 拖入接收器子物体上的 2D 光源
+    public float maxLightIntensity = 3f; // 充能满时的最大亮度
 
     public bool IsCharged { get; private set; }
 
@@ -36,6 +41,14 @@ public class LaserReceiver : MonoBehaviour
         bool beingHit = Time.time - lastHitTime < HitTimeout;
 
         ControlAnimation(beingHit);
+
+        // 👇 ================== 新增的发光代码 ================== 👇
+        if (chargeLight != null)
+        {
+            // 使用 Mathf.Lerp 让光源强度在 0 到 maxLightIntensity 之间，跟着 charge 平滑过渡
+            chargeLight.intensity = Mathf.Lerp(0f, maxLightIntensity, charge);
+        }
+        // 👆 ===================================================== 👆
     }
 
     void ControlAnimation(bool beingHit)
@@ -90,7 +103,6 @@ public class LaserReceiver : MonoBehaviour
         charge = 1f;
         IsCharged = true;
 
-        // 【修改点2】呼叫门的开门方法
         if (door != null)
         {
             door.OpenDoor();

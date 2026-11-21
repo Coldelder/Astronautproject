@@ -2526,6 +2526,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &511993509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6069631619938091424, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+  m_PrefabInstance: {fileID: 948812712}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &548544756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3046,6 +3057,14 @@ PrefabInstance:
     - target: {fileID: 1174736132968720807, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: m_Name
       value: FuseBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 1511314772}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: finalIntensity
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: laserController
@@ -4422,6 +4441,14 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1765807535}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 511993509}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: maxLightIntensity
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -4756,7 +4783,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.22
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
