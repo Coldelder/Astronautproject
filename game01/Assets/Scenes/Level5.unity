@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 138492960}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 1021479974}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -2594,6 +2598,14 @@ PrefabInstance:
       value: FuseBox
       objectReference: {fileID: 0}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1279095730}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 1511314772}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: interactRange
       value: 1
       objectReference: {fileID: 0}
@@ -3099,6 +3111,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872778683}
   m_CullTransparentMesh: 1
+--- !u!114 &1021479974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6069631619938091424, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+  m_PrefabInstance: {fileID: 77652659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1054978010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4111,6 +4134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuseBox (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 1021479974}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: interactRange
       value: 1
@@ -7852,6 +7879,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1318950433}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 1021479974}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2

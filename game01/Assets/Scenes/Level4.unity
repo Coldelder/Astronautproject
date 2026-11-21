@@ -3354,6 +3354,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216306091}
   m_CullTransparentMesh: 1
+--- !u!114 &225892655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5486757453518292911, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+  m_PrefabInstance: {fileID: 379132037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &362222837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,6 +3484,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuseBox
       objectReference: {fileID: 0}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1977483718}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 1511314772}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: interactRange
       value: 1
@@ -8649,6 +8668,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1564434256}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 225892655}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -9268,6 +9291,10 @@ PrefabInstance:
       value: FuseBox (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 2042080862}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: interactRange
       value: 1
       objectReference: {fileID: 0}
@@ -9642,6 +9669,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
+      propertyPath: isInteractable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: playerMoveScript
       value: 
       objectReference: {fileID: 0}
@@ -9879,6 +9910,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2042080862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6069631619938091424, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+  m_PrefabInstance: {fileID: 2113163657}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2056547794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10035,7 +10077,7 @@ PrefabInstance:
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1977483718}
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: rotateSpeed
       value: 40
@@ -10051,7 +10093,7 @@ PrefabInstance:
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: playerMoveScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1977483717}
     - target: {fileID: 6079009202969124009, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -10089,6 +10131,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 563311920}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 225892655}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2

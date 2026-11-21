@@ -13,7 +13,7 @@ public class SkipButton : MonoBehaviour
         if (btn != null) btn.onClick.AddListener(OnSkip);
     }
 
-    void OnSkip()
+    public void OnSkip()
     {
         var player = FindObjectOfType<CinematicPlayer>();
         if (player != null) player.Skip();

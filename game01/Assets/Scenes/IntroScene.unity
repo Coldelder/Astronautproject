@@ -300,6 +300,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6170542063650197236, guid: f39da8b7d56e1fd4caabb55484cae69f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8d57a8f011431b54682f6b4396b10e08, type: 3}
     - target: {fileID: 8093931153598540125, guid: f39da8b7d56e1fd4caabb55484cae69f, type: 3}
       propertyPath: m_Name
       value: Btn_Skip

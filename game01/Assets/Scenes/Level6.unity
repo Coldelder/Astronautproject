@@ -6101,6 +6101,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2baf664fdaeb01d4fa1a07340a506c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1238169957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6069631619938091424, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+  m_PrefabInstance: {fileID: 2097574841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1331900443
 GameObject:
   m_ObjectHideFlags: 0
@@ -6304,6 +6315,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuseBox
       objectReference: {fileID: 0}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 579647409}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 1331900444}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: interactRange
       value: 1
@@ -9149,6 +9168,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 336442545}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 1238169957}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2

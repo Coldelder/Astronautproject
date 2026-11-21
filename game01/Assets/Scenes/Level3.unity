@@ -2765,6 +2765,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
+      propertyPath: isInteractable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: playerMoveScript
       value: 
       objectReference: {fileID: 0}
@@ -4450,6 +4454,10 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1590829018}
+    - target: {fileID: 843761150529383895, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+      propertyPath: chargeLight
+      value: 
+      objectReference: {fileID: 1759147639}
     - target: {fileID: 1791446808931304270, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -5245,6 +5253,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699638595}
   m_CullTransparentMesh: 1
+--- !u!114 &1759147639 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6069631619938091424, guid: 625727d6fa991fa41a4d3215a13afb7b, type: 3}
+  m_PrefabInstance: {fileID: 1189097009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1831769943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5261,6 +5280,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuseBox
       objectReference: {fileID: 0}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1451346445}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: targetLight
+      value: 
+      objectReference: {fileID: 477739413}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: interactRange
       value: 1
@@ -5393,7 +5420,7 @@ PrefabInstance:
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1451346445}
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: rotateSpeed
       value: 40
@@ -5409,7 +5436,7 @@ PrefabInstance:
     - target: {fileID: 5412904229062252266, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: playerMoveScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1451346444}
     - target: {fileID: 6079009202969124009, guid: cfa9e0150eb7430499794e17d6cfd22d, type: 3}
       propertyPath: m_Color.b
       value: 1
