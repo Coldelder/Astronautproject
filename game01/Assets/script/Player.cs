@@ -5,28 +5,28 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("背包状态")]
-    public bool hasBattery = false; // 玩家是否拥有电池
+    public bool hasBattery = false;
+
     [Header("移动设置")]
     public float moveSpeed = 5f;
 
     [Header("跳跃设置")]
-    public float jumpForce = 10f;           // 跳跃力度
-    public Transform groundCheck;           // 脚底的检测点（空物体）
-    public float checkRadius = 0.2f;        // 检测范围大小
-    public LayerMask groundLayer;           // 地面所在的图层
-    private bool isGrounded;                // 是否在地面上
+    public float jumpForce = 10f;
+    public Transform groundCheck;
+    public float checkRadius = 0.2f;
+    public LayerMask groundLayer;
+    private bool isGrounded;
 
     [Header("梯子设置")]
-    public float climbSpeed = 3f;           // 爬梯子速度
-    private bool isOnLadder = false;        // 是否在梯子区域
-    private float verticalInput;            // 上下输入
+    public float climbSpeed = 3f;
+    private bool canClimb = false;          // 玩家是否在梯子触发器范围内
+    private bool isOnLadder = false;        // 玩家当前是否处于“正在爬梯子”的状态
+    private float verticalInput;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private float horizontalInput;
-
-    // 记录初始重力，方便离开梯子后恢复
     private float originalGravityScale;
 
     void Start()
@@ -39,22 +39,47 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // 1. 获取输入
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // 2. 水平翻转
+        // 水平翻转
         if (horizontalInput > 0) spriteRenderer.flipX = false;
         else if (horizontalInput < 0) spriteRenderer.flipX = true;
 
-        // 3. 动画状态（如果在梯子上移动，或者在地面移动，都算移动）
-        bool isMoving = Mathf.Abs(horizontalInput) > 0.01f || (isOnLadder && Mathf.Abs(verticalInput) > 0.01f);
-        animator.SetBool("isMoving", isMoving);
-
-        // 4. 地面检测（画一个隐形的圆，看看有没有碰到Ground层）
+        // 地面检测
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
-        // 5. 跳跃逻辑
+        // --- 核心逻辑：处理是否进入/退出爬梯状态 ---
+        if (canClimb)
+        {
+            // 必须按了 W 或 S，才进入爬梯状态
+            if (Mathf.Abs(verticalInput) > 0.01f)
+            {
+                isOnLadder = true;
+            }
+        }
+        else
+        {
+            // 离开梯子触发器范围，强制退出爬梯
+            isOnLadder = false;
+        }
+
+        // --- 动画状态逻辑 ---
+        if (isOnLadder)
+        {
+            animator.SetBool("isClimbing", true);
+            animator.SetBool("isMoving", false);
+            // 动画速度跟着上下输入走
+            animator.SetFloat("ClimbSpeed", Mathf.Abs(verticalInput));
+        }
+        else
+        {
+            animator.SetBool("isClimbing", false);
+            animator.SetBool("isMoving", Mathf.Abs(horizontalInput) > 0.01f);
+        }
+
+        // --- 跳跃逻辑 ---
+        // 只有在地面上、且不在梯子上时，才能跳跃。在梯子上按空格毫无反应。
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isOnLadder)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -63,17 +88,17 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        // --- 梯子逻辑 ---
         if (isOnLadder)
         {
-            // 在梯子上：关闭重力，允许上下移动
+            // 在梯子上：关闭重力
             rb.gravityScale = 0f;
+
+            // 👇 核心修改：允许 A/D (horizontalInput) 左右移动，同时保留 W/S (verticalInput) 上下移动
             rb.velocity = new Vector2(horizontalInput * moveSpeed, verticalInput * climbSpeed);
         }
-        // --- 地面/空中逻辑 ---
         else
         {
-            // 不在梯子上：恢复重力，水平移动，保留垂直惯性（下落/跳跃）
+            // 不在梯子上：恢复重力，正常移动
             rb.gravityScale = originalGravityScale;
             rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
         }
@@ -84,7 +109,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Ladder"))
         {
-            isOnLadder = true;
+            canClimb = true;
         }
     }
 
@@ -92,24 +117,25 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Ladder"))
         {
-            isOnLadder = false;
+            canClimb = false;
+            // 如果离开梯子，立刻取消爬梯状态
+            if (isOnLadder)
+            {
+                isOnLadder = false;
+            }
         }
     }
 
-    // --- 禁用时的急刹车处理（保留之前的功能） ---
     void OnDisable()
     {
-        if (rb != null)
-        {
-            rb.velocity = new Vector2(0f, rb.velocity.y);
-        }
+        if (rb != null) rb.velocity = new Vector2(0f, rb.velocity.y);
         if (animator != null)
         {
             animator.SetBool("isMoving", false);
+            animator.SetBool("isClimbing", false);
         }
     }
 
-    // 在场景里画出检测范围的圈，方便调试
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
