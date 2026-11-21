@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal; // 👈 必须引入，用于 Light2D
 
 public class LaserController : MonoBehaviour
 {
@@ -13,7 +14,11 @@ public class LaserController : MonoBehaviour
 
     [Header("状态")]
     public bool isPowered = false;
-    public bool isInteractable = true; // 👈 激光也可以加个开关
+    public bool isInteractable = true;
+
+    [Header("通电发光 (新增)")]
+    public Light2D laserLight;               // 👈 拖入激光身上的 2D 光源
+    public float targetLightIntensity = 2f;  // 👈 通电后的目标亮度
 
     private bool isControlling = false;
     private LineRenderer lineRenderer;
@@ -34,7 +39,12 @@ public class LaserController : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         if (laser2D == null) laser2D = GetComponent<Laser2D>();
 
+        // 默认关闭激光和光源
         SetLaserState(false);
+        if (laserLight != null)
+        {
+            laserLight.intensity = 0f;
+        }
     }
 
     void Update()
@@ -56,11 +66,10 @@ public class LaserController : MonoBehaviour
                     return;
                 }
 
-                // 使用和镜子相同的静态锁
                 if (!MirrorController.isAnyObjectControlled)
                 {
                     isControlling = true;
-                    MirrorController.isAnyObjectControlled = true; // 👈 占用全局锁
+                    MirrorController.isAnyObjectControlled = true;
                     if (playerMoveScript != null) playerMoveScript.enabled = false;
                 }
             }
@@ -79,16 +88,25 @@ public class LaserController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isControlling = false;
-                MirrorController.isAnyObjectControlled = false; // 👈 释放全局锁
+                MirrorController.isAnyObjectControlled = false;
                 if (playerMoveScript != null) playerMoveScript.enabled = true;
             }
         }
     }
 
+    // 👇 电闸调用这个方法
     public void PowerOn()
     {
         isPowered = true;
         SetLaserState(true);
+
+        // 👇 通电时，把激光的光源点亮
+        if (laserLight != null)
+        {
+            laserLight.intensity = targetLightIntensity;
+        }
+
+        Debug.Log("激光已通电并自动开启，光源已亮起。");
     }
 
     void SetLaserState(bool isOn)
@@ -97,7 +115,6 @@ public class LaserController : MonoBehaviour
         if (laser2D != null) laser2D.enabled = isOn;
     }
 
-    // 👇 同样加上防卡死保护
     void OnDisable()
     {
         if (isControlling)

@@ -2076,6 +2076,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
+      propertyPath: finalIntensity
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5450968292042792061, guid: 1f6782cbb2ad3bc4ea0cb5dba153f5fa, type: 3}
       propertyPath: laserController
       value: 
       objectReference: {fileID: 1649779369}
@@ -3910,7 +3914,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.22
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000

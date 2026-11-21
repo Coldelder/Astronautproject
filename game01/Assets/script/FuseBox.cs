@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal; // 👈 必须引入这个，才能使用 Light2D
+using UnityEngine.Rendering.Universal;
 
 public class FuseBox : MonoBehaviour
 {
@@ -12,11 +12,11 @@ public class FuseBox : MonoBehaviour
     public SpriteRenderer fuseBoxRenderer;
     public Sprite activatedSprite;
 
-    [Header("灯光效果 (新增)")]
-    public Light2D targetLight;             // 要闪烁的灯光（拖入场景里的灯）
+    [Header("灯光效果")]
+    public Light2D targetLight;             // 要闪烁的房间灯光
     public float finalIntensity = 2f;       // 闪烁完之后，灯光最终达到的亮度
-    public float flickerDuration = 0.5f;    // 闪烁持续的时间
-    public int flickerCount = 5;            // 闪烁的次数
+    public float flickerDuration = 0.5f;
+    public int flickerCount = 5;
 
     [Header("参数")]
     public float interactRange = 2f;
@@ -54,23 +54,23 @@ public class FuseBox : MonoBehaviour
                     fuseBoxRenderer.sprite = activatedSprite;
                 }
 
-                // 激光通电
-                if (laserController != null) laserController.PowerOn();
+                // 👇 删除了这里原本的激光通电代码，把它移到了协程最后
 
-                // 👇 触发灯光闪烁
+                // 触发灯光闪烁
                 if (targetLight != null)
                 {
                     StartCoroutine(FlickerAndBrighten());
                 }
                 else
                 {
-                    Debug.LogWarning("没有指定要闪烁的灯光！");
+                    // 如果没设置闪烁灯光，那就直接给激光通电
+                    if (laserController != null) laserController.PowerOn();
                 }
             }
         }
     }
 
-    // 👇 核心逻辑：灯光闪烁协程
+    // 灯光闪烁并变亮
     private IEnumerator FlickerAndBrighten()
     {
         float originalIntensity = targetLight.intensity;
@@ -79,25 +79,34 @@ public class FuseBox : MonoBehaviour
         // 1. 闪烁阶段
         for (int i = 0; i < flickerCount; i++)
         {
-            targetLight.intensity = 0f; // 关灯
+            targetLight.intensity = 0f;
             yield return new WaitForSeconds(flickerInterval);
 
-            targetLight.intensity = originalIntensity; // 开灯
+            targetLight.intensity = originalIntensity;
             yield return new WaitForSeconds(flickerInterval);
         }
 
         // 2. 平滑变亮阶段
         float elapsed = 0f;
-        float brightenTime = 1f; // 变亮过程耗时1秒
+        float brightenTime = 1f;
         float startIntensity = targetLight.intensity;
 
         while (elapsed < brightenTime)
         {
             elapsed += Time.deltaTime;
             targetLight.intensity = Mathf.Lerp(startIntensity, finalIntensity, elapsed / brightenTime);
-            yield return null; // 等待下一帧
+            yield return null;
         }
 
-        targetLight.intensity = finalIntensity; // 确保最后达到目标亮度
+        targetLight.intensity = finalIntensity;
+
+        // 👇 ================== 修改点：在这里给激光通电 ================== 👇
+        // 等房间的灯光完全亮起后，再激活激光
+        if (laserController != null)
+        {
+            laserController.PowerOn();
+            Debug.Log("灯光已稳定，激光设备正式启动！");
+        }
+        // 👆 ============================================================= 👆
     }
 }
