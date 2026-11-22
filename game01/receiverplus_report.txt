@@ -1,0 +1,8 @@
+Level8 已加载
+模板位置：(3.10, -3.02, 0.00)
+已移除旧的 ReceiverPlus
+door = Door
+animator = ReceiverPlus
+chargeLight = Light 2D
+Level8 已保存，实例位置 (7.10, -3.02, 0.00)
+RECEIVERPLUS_DONE

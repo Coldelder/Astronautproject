@@ -1,0 +1,16 @@
+Level8 已加载
+模板 FuseBox 位置：(-1.48, -2.45, 0.01)
+找到 LaserController 数量：8
+已移除旧的 FuseBoxPlus
+player = Player
+fuseBoxRenderer = FuseBoxPlus
+activatedSprite = dianzhaopening
+targetLight = Global Light 2D (intensity 0.22)
+laserControllers[0] = Laser
+laserControllers[1] = Laser (1)
+laserControllers[2] = Laser (2)
+laserControllers[3] = Laser (3)
+laserControllers[4] = Laser (4)
+laserControllers[5] = Laser (5)
+Level8 已保存，实例位置 (1.52, -2.45, 0.01)
+FUSEBOXPLUS_DONE

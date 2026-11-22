@@ -81,6 +81,7 @@ public class Laser2D : MonoBehaviour
         int mask = mirrorLayer | receiverLayer | wallLayer;
         int reflectCount = 0;
         LaserReceiver newHitReceiver = null;
+        GameObject newHitReceiverGo = null;
 
         while (true)
         {
@@ -101,6 +102,7 @@ public class Laser2D : MonoBehaviour
             // 接收器：记录并终止
             if ((layerBit & receiverLayer) != 0)
             {
+                newHitReceiverGo = hit.collider.gameObject;
                 newHitReceiver = hit.collider.GetComponent<LaserReceiver>();
                 break;
             }
@@ -126,8 +128,16 @@ public class Laser2D : MonoBehaviour
         // 每帧都通知被照射的接收器，让它自己累积/衰减充能。
         // 接收器靠"最后一次被照射的时间"判断激光是否还照着自己，所以不需要 enter/exit 事件。
         // 编辑模式下不通知，避免在编辑场景时误触发充能与开门。
-        if (Application.isPlaying && newHitReceiver != null)
-            newHitReceiver.OnLaserHit();
+        if (Application.isPlaying && newHitReceiverGo != null)
+        {
+            if (newHitReceiver != null)
+                newHitReceiver.OnLaserHit();
+
+            // ReceiverPlus：把发射源传过去，它才能区分"几条不同的激光"
+            LaserReceiverPlus plus = newHitReceiverGo.GetComponent<LaserReceiverPlus>();
+            if (plus != null)
+                plus.OnLaserHit(gameObject);
+        }
     }
 
     void AddPoint(Vector3 position)

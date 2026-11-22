@@ -1,0 +1,15 @@
+Level8 已加载
+梯子列 x=10：y -4~7，放置 5 盏灯
+  ClimberLight_10_1 @ (10.50, -3.50) 瓦片 y=-4
+  ClimberLight_10_2 @ (10.50, -0.50) 瓦片 y=-1
+  ClimberLight_10_3 @ (10.50, 2.50) 瓦片 y=2
+  ClimberLight_10_4 @ (10.50, 4.50) 瓦片 y=4
+  ClimberLight_10_5 @ (10.50, 7.50) 瓦片 y=7
+梯子列 x=21：y -1~9，放置 5 盏灯
+  ClimberLight_21_1 @ (21.50, -0.50) 瓦片 y=-1
+  ClimberLight_21_2 @ (21.50, 2.50) 瓦片 y=2
+  ClimberLight_21_3 @ (21.50, 4.50) 瓦片 y=4
+  ClimberLight_21_4 @ (21.50, 6.50) 瓦片 y=6
+  ClimberLight_21_5 @ (21.50, 9.50) 瓦片 y=9
+共放置 10 盏灯，Level8 已保存
+CLIMBERLIGHTS_DONE

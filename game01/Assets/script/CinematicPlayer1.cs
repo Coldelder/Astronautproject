@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 /// fades in from black at the start, then automatically loads the next scene.
 /// Creates its own RenderTexture and black overlay at runtime (no extra assets).
 /// </summary>
-public class CinematicPlayer1 : MonoBehaviour
+public class CinematicPlayer1 : MonoBehaviour, ISkippableCinematic
 {
     public VideoPlayer videoPlayer;
     public RawImage videoImage;
