@@ -1,0 +1,7 @@
+Level9 已加载
+tower 瓦片数量 18，x 最大 42，所在层 floor
+塔顶格 x=42 y=-7，格底 y=-7.00，灯光高度 -5.30
+光源位置 (40.50, -5.30)
+已绑定 Computer：Computer
+Level9 已保存
+TOWERLIGHT_DONE

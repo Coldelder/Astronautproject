@@ -17,6 +17,9 @@ public class CinematicPlayer : MonoBehaviour, ISkippableCinematic
     public string nextScene = "Level1";
     [Tooltip("Black-to-clear fade-in time in seconds.")]
     [Min(0f)] public float fadeInDuration = 1.0f;
+    [Tooltip("视频为空时直接跳到下一个场景（方便先搭框架、后补视频）。")]
+    public bool advanceWhenNoClip = true;
+    [Min(0f)] public float noClipDelay = 0.8f;
 
     CanvasGroup fadeGroup;
     RenderTexture rt;
@@ -54,8 +57,23 @@ public class CinematicPlayer : MonoBehaviour, ISkippableCinematic
     void Start()
     {
         fadeGroup.alpha = 1f;
+
+        // 没挂视频时不要卡在黑屏：按设置直接进入下一个场景
+        if (videoPlayer.clip == null)
+        {
+            if (advanceWhenNoClip) StartCoroutine(NoClipAdvance());
+            return;
+        }
+
         videoPlayer.Prepare();
         StartCoroutine(PrepareTimeout());
+    }
+
+    IEnumerator NoClipAdvance()
+    {
+        Debug.Log("[CinematicPlayer] 没有视频，直接跳到 " + nextScene);
+        yield return new WaitForSecondsRealtime(noClipDelay);
+        GoToNext();
     }
 
     IEnumerator PrepareTimeout()

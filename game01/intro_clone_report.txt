@@ -1,0 +1,13 @@
+已存在，跳过复制：Assets/Scenes/IntroScene 2.unity
+已存在，跳过复制：Assets/Scenes/IntroScene 3.unity
+IntroScene 1.unity nextScene = IntroScene 2（1 个过场脚本）
+IntroScene 1.unity 视频恢复为 sceneswitch.mp4（1 个）
+IntroScene 1.unity 已保存
+IntroScene 2.unity nextScene = MenuScene（1 个过场脚本）
+IntroScene 2.unity 视频已清空（1 个）
+IntroScene 2.unity 已保存
+IntroScene 3.unity nextScene = MenuScene（1 个过场脚本）
+IntroScene 3.unity 视频已清空（1 个）
+IntroScene 3.unity 已保存
+Build Settings 顺序：MenuScene | LevelScene | SettingsScene | Level1 | Level2 | IntroScene 1 | IntroScene 2 | IntroScene 3 | Level3 | Level4 | Level5 | Level6 | Level7 | Level8 | Level9 | IntroScene
+INTRO_CLONE_DONE

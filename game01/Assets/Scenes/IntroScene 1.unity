@@ -206,8 +206,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 26710007}
   videoImage: {fileID: 1406302671}
-  nextScene: Level5
+  nextScene: IntroScene 2
   fadeInDuration: 1
+  advanceWhenNoClip: 1
+  noClipDelay: 0.8
 --- !u!1001 &569192764
 PrefabInstance:
   m_ObjectHideFlags: 0
