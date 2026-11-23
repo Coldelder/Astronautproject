@@ -16,6 +16,7 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
+        DoorSfx.PlayOpen();
         if (animator != null)
         {
             animator.SetTrigger(disappearTriggerName);
