@@ -66,6 +66,7 @@ public class Computer : MonoBehaviour
         if (!playerScript.hasBattery) return;
 
         isActivated = true;
+        WorldSfx.Play("radio_noise", 0.85f);
         if (consumeBattery) playerScript.hasBattery = false;
 
         if (computerRenderer != null && activatedSprite != null)

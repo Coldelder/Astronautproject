@@ -21,6 +21,7 @@ public class LaserController : MonoBehaviour
     public float targetLightIntensity = 2f;  // 👈 通电后的目标亮度
 
     private bool isControlling = false;
+    public bool IsControlling { get { return isControlling; } }
     private LineRenderer lineRenderer;
     private Laser2D laser2D;
 

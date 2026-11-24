@@ -45,6 +45,8 @@ public class EmergencySwitch : MonoBehaviour
         {
             // 注意：这里假设你没有用到电池机制。如果需要电池，加上之前的判断即可。
             isActivated = true;
+            WorldSfx.Play("breaker", 1.0f);
+            LevelMusic.Duck(0.25f, 3.5f, 0.4f);   // duck music to 25%
 
             // 切换电闸图片
             if (fuseBoxRenderer != null && activatedSprite != null)

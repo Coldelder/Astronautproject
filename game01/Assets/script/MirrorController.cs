@@ -15,6 +15,7 @@ public class MirrorController : MonoBehaviour
     public static bool isAnyObjectControlled = false;
 
     private bool isControlling = false;
+    public bool IsControlling { get { return isControlling; } }
 
     void Start()
     {

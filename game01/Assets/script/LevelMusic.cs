@@ -43,11 +43,17 @@ public static class LevelMusic
     /// 主菜单/选关共用的曲目
     const string MainThemeId = "main_theme";
 
+    /// 这首曲子会在没有配乐的场景里继续播（第9关的音乐贯穿结局）
+    const string PersistentTrackId = "spaceship";
+
     /// 离开主菜单时记住它播到哪儿了，回来接着放
     static float mainThemeTime;
 
     /// 当前正在播的曲目 id；进入无配乐场景时清空，这样再进关就会从头放
     static string currentId;
+
+    /// 闪避系数：大音效响起时把音乐压下来
+    static float duckFactor = 1f;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Init()
@@ -61,7 +67,9 @@ public static class LevelMusic
         source.playOnAwake = false;
         source.loop = true;
         source.spatialBlend = 0f;
-        source.volume = Volume;
+        source.volume = Volume * duckFactor;
+
+        host.AddComponent<MusicDuckRunner>();
 
         currentId = null;
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -80,7 +88,10 @@ public static class LevelMusic
 
         if (!hasTrack)
         {
-            // 菜单、选关、过场：停掉并清空，这样下次进关会从头放
+            // 第9关的音乐：跨过结局/过场继续播，直到回到有配乐的场景（菜单）
+            if (currentId == PersistentTrackId) return;
+
+            // 其它情况：停掉并清空，这样下次进关会从头放
             if (source.isPlaying) source.Stop();
             source.clip = null;
             currentId = null;
@@ -104,7 +115,7 @@ public static class LevelMusic
 
         // 换曲，或者从选关界面进来：从头开始
         source.clip = clip;
-        source.volume = Volume;
+        source.volume = Volume * duckFactor;
 
         // 回到主菜单：接着上次的位置放；其它情况从 0 开始
         if (id == MainThemeId && mainThemeTime > 0.5f && mainThemeTime < clip.length - 0.5f)
@@ -129,7 +140,7 @@ public static class LevelMusic
         if (source == null) return;
         source.clip = clip;
         source.loop = loop;
-        source.volume = Volume;
+        source.volume = Volume * duckFactor;
         source.Play();
         currentId = id;
     }
@@ -138,5 +149,22 @@ public static class LevelMusic
     {
         if (source != null) source.Stop();
         currentId = null;
+    }
+
+    /// <summary>供 MusicDuckRunner 每帧调用</summary>
+    public static void ApplyDuck(float factor)
+    {
+        duckFactor = Mathf.Clamp01(factor);
+        if (source != null && source.isPlaying)
+            source.volume = Volume * duckFactor;
+    }
+
+    /// <summary>
+    /// 压低背景音乐（大音效响起时用）。
+    /// 例：LevelMusic.Duck(0.25f, 3.5f, 0.4f) —— 压到 25%，保持 3.5 秒，过渡 0.4 秒。
+    /// </summary>
+    public static void Duck(float amount, float holdSeconds = 2f, float fadeSeconds = 0.4f)
+    {
+        MusicDuckRunner.Duck(amount, holdSeconds, fadeSeconds);
     }
 }
